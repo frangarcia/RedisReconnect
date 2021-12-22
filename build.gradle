@@ -1,0 +1,33 @@
+plugins {
+  id "groovy"
+  id "application"
+  id("com.github.johnrengelman.shadow") version "1.2.3"
+}
+
+group = "com.example"
+version = "1.0.0-SNAPSHOT"
+
+repositories {
+  mavenCentral()
+}
+
+String vertxVersion = "3.9.11"
+
+String mainClassName = "io.vertx.core.Launcher"
+String mainVerticleName = "com.example.starter.MainVerticle"
+
+dependencies {
+  compile("io.vertx:vertx-core:$vertxVersion")
+  compile("io.vertx:vertx-lang-groovy:$vertxVersion")
+  compile("io.vertx:vertx-redis-client:$vertxVersion")
+}
+
+compileJava {
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+run {
+  args = ["run", mainVerticleName]
+  main = mainClassName
+}
